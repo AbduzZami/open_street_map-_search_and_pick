@@ -43,7 +43,7 @@ To use is simple, just call the widget bellow. You need to pass the default cent
 
 # Then Usage
 
-Now if you press Set Current Loatiion button, you will get the pinned location by onPicked method.
+Now if you press Set Current Location button, you will get the pinned location by onPicked method.
 
 In the onPicked method you will receive pickedData.
 
