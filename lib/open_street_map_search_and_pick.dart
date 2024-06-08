@@ -350,7 +350,10 @@ class _OpenStreetMapSearchAndPickState
 
                               setState(() {});
                             });
-                          }),
+                          },
+                      onTap:() {
+                        _searchController.text = "";
+                      } ,),
                       StatefulBuilder(
                         builder: ((context, setState) {
                           return ListView.builder(
