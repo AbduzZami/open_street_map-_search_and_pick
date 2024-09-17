@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: OpenStreetMapSearchAndPick(
           buttonTextStyle:
               const TextStyle(fontSize: 18, fontStyle: FontStyle.normal),
-          buttonColor: Colors.blue,
+          buttonColor: Colors.black,
           buttonText: 'Set Current Location',
           onPicked: (pickedData) {
             print(pickedData.latLong.latitude);
@@ -76,6 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
             print(pickedData.address);
             print(pickedData.addressName);
           },
+          isDarkMode: false,
+          buttonWidth: 200,
         ));
   }
 }

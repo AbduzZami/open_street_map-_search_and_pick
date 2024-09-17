@@ -27,6 +27,7 @@ class OpenStreetMapSearchAndPick extends StatefulWidget {
   final double buttonWidth;
   final TextStyle buttonTextStyle;
   final String baseUri;
+  final bool isDarkMode;
 
   const OpenStreetMapSearchAndPick({
     Key? key,
@@ -48,6 +49,7 @@ class OpenStreetMapSearchAndPick extends StatefulWidget {
     this.buttonWidth = 200,
     this.baseUri = 'https://nominatim.openstreetmap.org',
     this.locationPinIcon = Icons.location_on,
+    required this.isDarkMode
   }) : super(key: key);
 
   @override
@@ -168,6 +170,13 @@ class _OpenStreetMapSearchAndPickState
   @override
   Widget build(BuildContext context) {
     // String? _autocompleteSelection;
+    var backgroundColor = Colors.white;
+    var textColor = Colors.black;
+
+    if (widget.isDarkMode) {
+      backgroundColor = Colors.black;
+      textColor = Colors.white;
+    }
     OutlineInputBorder inputBorder = OutlineInputBorder(
       borderSide: BorderSide(color: widget.buttonColor),
     );
@@ -235,7 +244,7 @@ class _OpenStreetMapSearchAndPickState
                 ),
               ),
               Positioned(
-                bottom: 180,
+                bottom: 220,
                 right: 5,
                 child: FloatingActionButton(
                   heroTag: 'btn1',
@@ -251,7 +260,7 @@ class _OpenStreetMapSearchAndPickState
                 ),
               ),
               Positioned(
-                bottom: 120,
+                bottom: 160,
                 right: 5,
                 child: FloatingActionButton(
                   heroTag: 'btn2',
@@ -267,7 +276,7 @@ class _OpenStreetMapSearchAndPickState
                 ),
               ),
               Positioned(
-                bottom: 60,
+                bottom: 100,
                 right: 5,
                 child: FloatingActionButton(
                   heroTag: 'btn3',
@@ -296,7 +305,7 @@ class _OpenStreetMapSearchAndPickState
                 child: Container(
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: backgroundColor,
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Column(
@@ -304,10 +313,26 @@ class _OpenStreetMapSearchAndPickState
                       TextFormField(
                           controller: _searchController,
                           focusNode: _focusNode,
+                          style: TextStyle(
+                            backgroundColor: backgroundColor,
+                            color: textColor
+                          ),
                           decoration: InputDecoration(
                             hintText: widget.hintText,
-                            border: inputBorder,
-                            focusedBorder: inputFocusBorder,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: textColor),
+        ),
+                            labelStyle: TextStyle(
+                                backgroundColor: backgroundColor,
+                                color: textColor
+                            ),
+                            hintStyle: TextStyle(
+                                backgroundColor: backgroundColor,
+                                color: textColor
+                            ) ,
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: textColor),
+                            ),
                           ),
                           onChanged: (String value) {
                             if (_debounce?.isActive ?? false) {
@@ -363,7 +388,8 @@ class _OpenStreetMapSearchAndPickState
                                 _options.length > 5 ? 5 : _options.length,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                title: Text(_options[index].displayname),
+                                title: Text(_options[index].displayname,
+                                  style: TextStyle(color: textColor ) ,),
                                 subtitle: Text(
                                     '${_options[index].lat},${_options[index].lon}'),
                                 onTap: () {
